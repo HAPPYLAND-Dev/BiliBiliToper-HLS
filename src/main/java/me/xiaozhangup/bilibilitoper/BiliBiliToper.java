@@ -60,17 +60,18 @@ public class BiliBiliToper extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         loadConfig();
+        BBSToper.setup();
 
         ConfigManager.createFile("users");
         ConfigManager.createFile("videos");
 
         listenerManager.addListeners(
-                new ToperUI(), new ChatInput()
+                new ToperUI(), new ChatInput(), new BBSToper()
         );
         listenerManager.register();
 
         Command.register("bilitoper", (commandSender, command, s, inside) -> {
-            ToperUI.open((Player) commandSender);
+            BBSToper.open((Player) commandSender);
             return false;
         });
         Command.register("bilireload", (commandSender, command, s, strings) -> {
